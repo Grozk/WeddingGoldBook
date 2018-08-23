@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.grozk.perso.weddingapps.entity.repository.WeddingRepository;
 import fr.grozk.perso.weddingapps.model.Message;
 import fr.grozk.perso.weddingapps.model.exception.ModelControlException;
 import fr.grozk.perso.weddingapps.service.MessageService;

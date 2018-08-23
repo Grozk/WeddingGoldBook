@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Gold Book</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+	<script type="text/javascript" th:src="@{/js/myJS.js}" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+  </head>
+  
+  <body id="body">
+
+	<div
+		style="text-align: right; padding: 5px; margin: 5px 0px; background: #ccc;">
+		Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
+	</div>
+
+	<div id="mainDiv">
+  	
+	    <h1 th:text="#{titre}"></h1>
+			
+		<button onclick="wedding()" th:text="#{creation_livre_or}"></button>
+		<button onclick="message()" th:text="#{participation_livre_or}"></button>
+	
+  	</div>
+  	
+  <input id="publicId" name="publicId" type="hidden" /> 
+  </body>
+</html>

@@ -15,17 +15,19 @@ public class Wedding {
 	private final String number2;
 	private final String weddingDate;
 	private String idPublic;
+	private final String mailCreator;
 
 	@JsonCreator
 	public Wedding(@JsonProperty("partner1") String partner1,@JsonProperty("partner2") String partner2, 
 			@JsonProperty("number1") String number1,@JsonProperty("number2") String number2,
-			@JsonProperty("weddingDate") String weddingDate) {
+			@JsonProperty("weddingDate") String weddingDate, @JsonProperty("mailCreator") String mailCreator) {
 		super();
 		this.partner1 = partner1;
 		this.partner2 = partner2;
 		this.number1 = number1;
 		this.number2 = number2;
 		this.weddingDate = weddingDate;
+		this.mailCreator = mailCreator;
 	}
 
 	public void control() throws ModelControlException {
@@ -70,9 +72,14 @@ public class Wedding {
 		this.idPublic = idPublic;
 	}
 
+	public String getMailCreator() {
+		return mailCreator;
+	}
+
 	@Override
 	public String toString() {
 		return "Wedding [partner1=" + partner1 + ", partner2=" + partner2 + ", number1=" + number1 + ", number2="
-				+ number2 + ", weddingDate=" + weddingDate + "]";
+				+ number2 + ", weddingDate=" + weddingDate + ", idPublic=" + idPublic + ", mailCreator=" + mailCreator
+				+ "]";
 	}
 }

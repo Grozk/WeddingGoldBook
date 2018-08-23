@@ -7,21 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @CrossOrigin(origins = "*")
 @Controller
-@RequestMapping(value = "/index", produces = "application/html")
 public class IndexController {
 	
-
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, value = "/index", produces = "application/html")
 	public String welcome() {
 		return "index";
 	}
 	
-	@RequestMapping(value="/wedding", method = RequestMethod.GET)
+	@RequestMapping(value="/index/wedding", method = RequestMethod.GET)
 	public String joinWedding() {
 		return "wedding";
 	}
 	
-	@RequestMapping(value="/message", method = RequestMethod.GET)
+	@RequestMapping(value="/index/message", method = RequestMethod.GET)
 	public String createMessage() {
 		return "message";
 	}

@@ -9,7 +9,8 @@ CREATE TABLE WEDDING (
 `number1` VARCHAR(20) NULL,
 `number2` VARCHAR(20) NULL,
 `wedding_date` DATE NOT NULL,
-`id_public` VARCHAR(10) NOT NULL
+`id_public` VARCHAR(10) NOT NULL,
+`mail_creator` VARCHAR(30)
 )ENGINE=InnoDB;
 
 ALTER TABLE WEDDING ADD INDEX(id_public);

@@ -1,11 +1,16 @@
 package fr.grozk.perso.weddingapps;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
@@ -14,47 +19,47 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 
 		@Override
 		public void addResourceHandlers(ResourceHandlerRegistry registry) {
-			registry.addResourceHandler("/resources/**/**")
-	                        .addResourceLocations("/resources/");
+			registry.addResourceHandler("ressources/**/**",
+					"/img/**",
+	                "/css/**",
+	                "/js/**",
+	                "/i18n/**")
+	                        .addResourceLocations("/resources/",
+	                        		"classpath:/static/img/",
+	                        		"classpath:/static/css/",
+	                                "classpath:/static/js/",
+	                                "classpath:/i18n/");
 		}
 		
 		@Bean
 		public InternalResourceViewResolver viewResolver() {
 			InternalResourceViewResolver viewResolver 
 	                         = new InternalResourceViewResolver();
-//			viewResolver.setViewClass(JstlView.class);
-			viewResolver.setPrefix("/WEB-INF/views/");
+			viewResolver.setPrefix("/resources/templates/");
 			viewResolver.setSuffix(".html");
 			return viewResolver;
 		}
 		
-		@Override
-		public void configureDefaultServletHandling(
-		        DefaultServletHandlerConfigurer configurer) {
-		    configurer.enable();
-		}
-		
-//		@Bean
-//		public LocaleResolver localeResolver() {
-//		    SessionLocaleResolver slr = new SessionLocaleResolver();
-//		    slr.setDefaultLocale(Locale.FRENCH);
-//		    return slr;
-//		}
-//		
-		/**
-		 * If we want to access the page with the two different locales we have to add the parameter lang to the URL in the form: /international?lang=fr
-		 * If no lang parameter is present on the URL, the application will use the default locale, in our case FRENCH locale.
-		 * @return
-		 */
-//		@Bean
-//		public LocaleChangeInterceptor localeChangeInterceptor() {
-//		    LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-//		    lci.setParamName("lang");
-//		    return lci;
-//		}
-//
-//		@Override
-//		public void addInterceptors(InterceptorRegistry registry) {
-//		    registry.addInterceptor(localeChangeInterceptor());
-//		}
+		  @Bean("messageSource")
+		   public MessageSource messageSource() {
+		      ReloadableResourceBundleMessageSource messageSource=new ReloadableResourceBundleMessageSource();
+		      messageSource.setBasename("classpath:i18n/messages");
+		      messageSource.setDefaultEncoding("UTF-8");
+		      messageSource.setUseCodeAsDefaultMessage(true);
+		      return messageSource;
+		   }
+		  
+		  @Bean
+		   public LocaleResolver localeResolver() {
+		      CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		      return localeResolver;
+		   }
+		  
+
+		   @Override
+		   public void addInterceptors(InterceptorRegistry registry) {
+		      LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		      localeChangeInterceptor.setParamName("lang");
+		      registry.addInterceptor(localeChangeInterceptor);
+		   }
 }

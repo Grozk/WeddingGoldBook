@@ -49,6 +49,8 @@ public class WeddingEntity {
 	@Column(name = "id_public")
 	private String id_public;
 
+	@Column(name = "mail_Creator")
+	private String mail_Creator;
 	
 	public WeddingEntity() {
 		super();
@@ -56,7 +58,7 @@ public class WeddingEntity {
 	}
 
 	public WeddingEntity(Long id, String partner1, String partner2, String number1, String number2,
-			Date wedding_date, String id_public) {
+			Date wedding_date, String id_public, String mailCreator) {
 		super();
 		this.id = id;
 		this.partner1 = partner1;
@@ -65,6 +67,7 @@ public class WeddingEntity {
 		this.number2 = number2;
 		this.wedding_date = wedding_date;
 		this.id_public = id_public;
+		this.mail_Creator = mailCreator;
 	}
 	
 	public WeddingEntity(Wedding wedding) {
@@ -73,6 +76,7 @@ public class WeddingEntity {
 		this.number1 = wedding.getNumber1();
 		this.number2 = wedding.getNumber2();
 		this.id_public = wedding.getIdPublic();
+		this.mail_Creator = wedding.getMailCreator();
 		
 		try {
 			this.wedding_date = simpleDateFormat.parse(wedding.getWeddingDate());
@@ -136,4 +140,13 @@ public class WeddingEntity {
 	public void setId_public(String id_public) {
 		this.id_public = id_public;
 	}
+
+	public String getMailCreator() {
+		return mail_Creator;
+	}
+
+	public void setMailCreator(String mailCreator) {
+		this.mail_Creator = mailCreator;
+	}
+
 }

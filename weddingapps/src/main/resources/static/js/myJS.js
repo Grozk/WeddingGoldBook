@@ -76,7 +76,7 @@ function message() {
 	$('#publicId').val(publicID);
 		
 	$.ajax({
-		url : "/index/message",
+		url : '/index/message',
 		type : "GET",
 		async : false, // Mode synchrone
 		dataType : "json",
