@@ -96,6 +96,7 @@ function submitNewWedding(){
 	obj.number1 = $('#num_partner1').val();
 	obj.number2 = $('#num_partner2').val();
 	obj.weddingDate = $('#weddingDate').val();
+	obj.mailCreator = $('#creationMail').val();
 	var jsonString= JSON.stringify(obj);
 	
 	$.ajax({
